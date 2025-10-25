@@ -1,0 +1,7 @@
+model:
+  n_models: 10
+  seed: 42
+  
+mlflow:
+  tracking_uri: "http://localhost:5000"
+  experiment_name: "fraud_detection_continuous"
