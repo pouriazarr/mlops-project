@@ -2,7 +2,7 @@
 
 echo "Starting continuous training loop..."
 
-# 🚩 Change following items based on your setup
+
 source .mlops/bin/activate
 
 
