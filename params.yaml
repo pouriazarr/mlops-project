@@ -5,6 +5,14 @@ model:
 mlflow:
   tracking_uri: "http://localhost:5000"
   experiment_name: "fraud_detection_continuous"
+  
+api:
+  host: "0.0.0.0"
+  port: 8000
+
+data:
+  fraud_rate: 0.05
+  batch_size: 949 
 
 mlflow_continious:
   experiment_name: "fraud_detection_incremental"
