@@ -1,0 +1,19 @@
+artifact_path: /home/pouria/Documents/mlops-project/mlruns/815048650452630569/models/m-ffa342fc3dc041e0b116cf1a9b3e9b88/artifacts
+flavors:
+  python_function:
+    cloudpickle_version: 3.1.1
+    code: null
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.pyfunc.model
+    python_model: python_model.pkl
+    python_version: 3.12.3
+    streamable: false
+mlflow_version: 3.5.1
+model_id: m-ffa342fc3dc041e0b116cf1a9b3e9b88
+model_size_bytes: 6687751
+model_uuid: m-ffa342fc3dc041e0b116cf1a9b3e9b88
+prompts: null
+run_id: b8bb9b3e964640cca79f95511e785a32
+utc_time_created: '2025-10-25 16:30:08.290070'

@@ -1,0 +1,14 @@
+artifact_uri: /home/pouria/Documents/mlops-project/mlruns/815048650452630569/eafc21191e4648e8a8f73cf7d8650462/artifacts
+end_time: 1761472600700
+entry_point_name: ''
+experiment_id: '815048650452630569'
+lifecycle_stage: active
+run_id: eafc21191e4648e8a8f73cf7d8650462
+run_name: righteous-auk-945
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1761472593675
+status: 3
+tags: []
+user_id: pouria

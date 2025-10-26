@@ -1,0 +1,5 @@
+mlflow==3.5.1
+river
+pandas
+numpy
+scikit-learn

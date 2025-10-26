@@ -2,14 +2,12 @@
 
 echo "Starting continuous training loop..."
 
-
 source .mlops/bin/activate
-
 
 while true; do
     echo "Checking for new data..."
     
-    # Generate new batch (🚩 simulate new data arrival)
+    # Generate new batch (simulate new data arrival)
     python src/data/generate_new_batch.py
     
     # Run continuous training

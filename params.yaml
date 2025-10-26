@@ -5,3 +5,6 @@ model:
 mlflow:
   tracking_uri: "http://localhost:5000"
   experiment_name: "fraud_detection_continuous"
+
+mlflow_continious:
+  experiment_name: "fraud_detection_incremental"

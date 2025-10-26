@@ -1,0 +1,6 @@
+artifact_location: /home/pouria/Documents/mlops-project/mlruns/815048650452630569
+creation_time: 1761409801929
+experiment_id: '815048650452630569'
+last_update_time: 1761409801929
+lifecycle_stage: active
+name: fraud_detection_continuous

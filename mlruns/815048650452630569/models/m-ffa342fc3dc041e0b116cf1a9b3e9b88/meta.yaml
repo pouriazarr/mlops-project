@@ -1,0 +1,10 @@
+artifact_location: /home/pouria/Documents/mlops-project/mlruns/815048650452630569/models/m-ffa342fc3dc041e0b116cf1a9b3e9b88/artifacts
+creation_timestamp: 1761409807837
+experiment_id: '815048650452630569'
+last_updated_timestamp: 1761409808872
+model_id: m-ffa342fc3dc041e0b116cf1a9b3e9b88
+model_type: ''
+name: model
+source_run_id: b8bb9b3e964640cca79f95511e785a32
+status: 2
+status_message: null
