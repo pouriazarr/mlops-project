@@ -28,10 +28,16 @@ services:
     restart: unless-stopped
 
   fastapi:
-    image: mlops/fastapi:v1
+    image: mlops/mlflow-fastapi:v1
     container_name: fastapi
     ports:
       - "8000:8000"
+      - "5000:5000"
+    volumes:
+      - ./dockerfiles/models:/app/models
+      - ./dockerfiles/data:/app/data
+      - ./dockerfiles/metrics:/app/metrics
+      - ./dockerfiles/mlruns:/app/mlruns   
     restart: unless-stopped
 
 volumes:
