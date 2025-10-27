@@ -28,7 +28,7 @@ services:
     restart: unless-stopped
 
   fastapi:
-    image: mlops/mlflow-fastapi:v1
+    image: mlops/mlflow-fastapi:v2
     container_name: fastapi
     ports:
       - "8000:8000"
