@@ -6,14 +6,13 @@ import json
 from datetime import datetime
 import yaml
 import sys
+import requests
 sys.path.append('src')
-
 from models.incremental_model import IncrementalFraudDetector
 import pickle
 
 def continuous_training(config_path='params.yaml'):
 
-    # Load config
     with open(config_path, 'r') as f:
         config = yaml.safe_load(f)
     
@@ -26,7 +25,6 @@ def continuous_training(config_path='params.yaml'):
         print("No existing model found, please run initial training first")
         return
     
-    # Find new data batches
     new_batch_files = glob.glob('data/new_batches/*.csv')
     
     if not new_batch_files:
@@ -35,7 +33,6 @@ def continuous_training(config_path='params.yaml'):
     
     print(f"Found {len(new_batch_files)} new batches")
     
-    # Set MLflow tracking
     mlflow.set_tracking_uri(config['mlflow']['tracking_uri'])
     mlflow.set_experiment(config['mlflow_continious']['experiment_name'])
 
@@ -43,47 +40,49 @@ def continuous_training(config_path='params.yaml'):
     with mlflow.start_run():
         initial_metrics = model.get_metrics()
         
-        # Process each new batch
         total_new_samples = 0
         for batch_file in sorted(new_batch_files):
             print(f"Processing {batch_file}")
             
-            # Load and preprocess new data
             new_data = pd.read_csv(batch_file)
             processed_data = preprocessor.transform(new_data)
-            
-            # Prepare features and target
+
             feature_cols = ['amount', 'hour', 'day_of_week', 'merchant_category', 
                            'previous_amount', 'time_since_last', 'amount_log', 
                            'is_weekend', 'is_night', 'amount_ratio']
             
             X_new = processed_data[feature_cols]
             y_new = processed_data['is_fraud']
-            
-            # Incremental training
+
             model.partial_fit(X_new, y_new)
             total_new_samples += len(X_new)
-            
-            # Move processed file to avoid reprocessing
+
             processed_dir = 'data/processed_batches'
             os.makedirs(processed_dir, exist_ok=True)
             os.rename(batch_file, os.path.join(processed_dir, os.path.basename(batch_file)))
-        
-        # Get updated metrics
+
         final_metrics = model.get_metrics()
-        
-        # Log metrics to MLflow
+
         mlflow.log_metric("total_new_samples", total_new_samples)
         for metric_name, metric_value in final_metrics.items():
             mlflow.log_metric(f"final_{metric_name}", metric_value)
-        
-        # Save updated model
+
         model.save_model('models/fraud_detector_updated.pkl')
-        
-        # Replace old model with updated one
+
         os.replace('models/fraud_detector_updated.pkl', 'models/fraud_detector.pkl')
+
+        try:
+            response = requests.post('http://localhost:8000/reload-model')
+            if response.status_code == 200:
+                print("✅ Model reloaded in FastAPI successfully")
+            else:
+                print(f"❌ Failed to reload model: {response.text}")
+        except Exception as e:
+            print(f"⚠️  Could not reload model automatically: {e}")
+            print("💡 Run manually: curl -X POST http://localhost:8000/reload-model")
         
-        # Save metrics for DVC
+            print(f"Continuous training completed. Processed {total_new_samples} new samples")
+
         metrics_data = {
             'timestamp': datetime.now().isoformat(),
             'new_samples_processed': total_new_samples,

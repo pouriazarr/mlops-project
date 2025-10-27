@@ -84,10 +84,8 @@ async def root():
         </head>
         <body>
             <div class="container">
-                <p>😎 Welcome to the MLOps Project of this course.</p>
+                <p>😎 Welcome to the MLOps Project.</p>
                 <p>🚀 Check <a href="/docs">/docs</a> for API documentation.</p>
-                <p>😉 Best Wishes for you</p>
-                <p><a href="https://m-fozouni.ir/de7" target="_blank" rel="noopener noreferrer">👉 Data Engineering Course</a></p>
                 <p>and NOW we have</p>
                 <p>🚩 Metrics available at http://localhost:8000/metrics</p>
             </div>

@@ -34,10 +34,10 @@ services:
       - "8000:8000"
       - "5000:5000"
     volumes:
-      - ./dockerfiles/models:/app/models
-      - ./dockerfiles/data:/app/data
-      - ./dockerfiles/metrics:/app/metrics
-      - ./dockerfiles/mlruns:/app/mlruns   
+      - ./models:/app/models
+      - ./data:/app/data
+      - ./metrics:/app/metrics
+      - ./mlruns:/app/mlruns   
     restart: unless-stopped
 
 volumes:
